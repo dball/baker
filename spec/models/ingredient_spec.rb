@@ -15,11 +15,28 @@ describe Ingredient do
     end
   end
 
-  describe "an empty ingredient" do
+  describe "a simple ingredient" do
     before(:each) do
       @ingredient = Ingredient.generate
     end
 
     it_should_behave_like "all ingredients"
+
+    it "must not have a subrecipe" do
+      @ingredient.subrecipe.should be_nil
+    end
+  end
+
+  describe "an ingredient of a recipe" do
+    before(:each) do
+      @subrecipe = Recipe.generate
+      @ingredient = Ingredient.generate( :subrecipe => @subrecipe )
+    end
+
+    it_should_behave_like "all ingredients"
+
+    it "must have a subrecipe" do
+      @ingredient.subrecipe.should == @subrecipe
+    end
   end
 end

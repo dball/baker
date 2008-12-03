@@ -12,9 +12,10 @@
 ActiveRecord::Schema.define(:version => 20081202232900) do
 
   create_table "ingredients", :force => true do |t|
-    t.string  "name",      :limit => 40,                               :null => false
-    t.decimal "percent",                 :precision => 3, :scale => 6, :null => false
-    t.integer "recipe_id",                                             :null => false
+    t.string  "name",         :limit => 40,                               :null => false
+    t.decimal "percent",                    :precision => 3, :scale => 6, :null => false
+    t.integer "recipe_id",                                                :null => false
+    t.integer "subrecipe_id"
   end
 
   add_index "ingredients", ["recipe_id"], :name => "index_ingredients_on_recipe_id"

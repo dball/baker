@@ -16,6 +16,7 @@ class Initial < ActiveRecord::Migration
       t.column :name, :string, :limit => 40, :null => false
       t.column :percent, :decimal, :scale => 6, :precision => 3, :null => false
       t.column :recipe_id, :integer, :null => false
+      t.column :subrecipe_id, :integer
     end
 
     add_index :ingredients, :recipe_id
