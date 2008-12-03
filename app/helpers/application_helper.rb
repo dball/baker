@@ -11,4 +11,10 @@ module ApplicationHelper
   def stylesheet(*files)
     content_for(:head) { stylesheet_link_tag(*files) }
   end
+
+  def edit_form_for(name, model, options = {}, &block)
+    url = model.new_record? ? { :action => 'create' } : { :action => 'update', :id => model }
+    html = model.new_record? ? {} : { :method => :put }
+    form_for(name, model, options.merge({ :url => url, :html => html }), &block)
+  end
 end
