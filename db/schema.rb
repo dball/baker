@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(:version => 20081202232900) do
   create_table "ingredients", :force => true do |t|
     t.string  "name",      :limit => 40,                               :null => false
     t.decimal "percent",                 :precision => 3, :scale => 6, :null => false
-    t.integer "unit_id",                                               :null => false
     t.integer "recipe_id",                                             :null => false
   end
 

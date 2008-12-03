@@ -6,12 +6,12 @@ describe Ingredient do
       @ingredient.name.class.should == String
     end
 
-    it "must have a unit" do
-      @ingredient.unit.class.should == Unit
-    end
-
     it "must have a recipe" do
       @ingredient.recipe.class.should == Recipe
+    end
+
+    it "must have a percent" do
+      @ingredient.percent.class.should == BigDecimal
     end
   end
 
