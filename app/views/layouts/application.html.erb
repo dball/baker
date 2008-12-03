@@ -11,6 +11,9 @@
 </head>
 <body>
   <div id="content">
+    <% if title %>
+      <h1><%=h title %></h1>
+    <% end %>
     <%= yield %>
   </div>
 </body>
