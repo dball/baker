@@ -1,0 +1,18 @@
+<% fields_for_ingredient(ingredient) do |fields| %>
+  <% content_tag_for(:tr, ingredient) do %>
+    <td>
+      <% if ingredient.subrecipe %>
+        <%=h ingredient.subrecipe.name %>
+        <%= fields.hidden_field :subrecipe_id %>
+      <% else %>
+        <%= fields.text_field :name %>
+      <% end %>
+    </td>
+    <td>
+      <%= fields.text_field :percent %>
+    </td>
+    <td>
+      <%= button_to('✖', '#') %>
+    </td>
+  <% end %>
+<% end %>

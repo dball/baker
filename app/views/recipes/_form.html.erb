@@ -1,0 +1,14 @@
+<% edit_form_for(:recipe, recipe) do |form| %>
+  <p>
+    <%= form.label(:name, 'Name') %>
+    <%= form.text_field(:name) %>
+  </p>
+  <table id="ingredients">
+    <tbody>
+      <%= render :partial => 'ingredient', :collection => recipe.ingredients %>
+    </tbody>
+  </table>
+  <p>
+    <%= submit_tag('OK') %>
+  </p>
+<% end %>
