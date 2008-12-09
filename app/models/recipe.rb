@@ -13,6 +13,7 @@ class Recipe < ActiveRecord::Base
       end
     end
     values[:new].each do |attributes|
+      next if attributes.values.all? {|value| value.blank? }
       ingredients.build(attributes)
     end if values[:new]
   end
