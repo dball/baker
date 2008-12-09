@@ -14,9 +14,9 @@
     <td>
       <% if ingredient.new_record? %>
         <%= button_to_function('✚', 'addIngredient(this)', { :class => 'adder' }) %>
-        <%= button_to_function('✖', 'deleteIngredient(this)', { :class => 'deleter', :style => 'display: none;' }) %>
+        <%= button_to_function('✖', 'deleteIngredient(this)', { :class => 'deleter', :tabindex => -1, :style => 'display: none;' }) %>
       <% else %>
-        <%= button_to_function('✖', 'deleteIngredient(this)', { :class => 'deleter' }) %>
+        <%= button_to_function('✖', 'deleteIngredient(this)', { :class => 'deleter', :tabindex => -1 }) %>
       <% end %>
     </td>
   <% end %>
