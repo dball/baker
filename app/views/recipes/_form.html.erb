@@ -1,11 +1,20 @@
+<%= error_messages_for(:recipe) %>
+
 <% edit_form_for(:recipe, recipe) do |form| %>
   <p>
     <%= form.label(:name, 'Name') %>
     <%= form.text_field(:name) %>
   </p>
   <table id="ingredients">
+    <thead>
+      <tr>
+        <th>Ingredient</th>
+        <th>Percent</th>
+      </tr>
+    </thead>
     <tbody>
       <%= render :partial => 'ingredient', :collection => recipe.ingredients %>
+      <%= render :partial => 'ingredient', :object => Ingredient.new %>
     </tbody>
   </table>
   <p>
