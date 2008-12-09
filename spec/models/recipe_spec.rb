@@ -10,15 +10,21 @@ describe Recipe do
       @recipe.ingredients.map {|i| i.class }.all? {|c| c == Ingredient }.should be_true
     end
 
-    it "should build new ingredients via new_ingredient_attributes" do
-      attributes = (1..3).to_a.map do
+    it "should add new ingredients" do
+      new_attributes = (1..3).to_a.map do
         Ingredient.spawn.attributes.reject {|k, v| k == 'recipe_id' }
       end
-      old_ingredient_attributes = @recipe.ingredients.map {|i| i.attributes }
-      @recipe.new_ingredient_attributes = attributes
+      old_attributes = @recipe.ingredients.map {|i| i.attributes }
+      values = {}
+      @recipe.ingredients.each do |ingredient|
+        next if ingredient.new_record?
+        values[ingredient.id.to_s] = ingredient.attributes
+      end
+      values[:new] = new_attributes
+      @recipe.ingredient_attributes = values
       @recipe.ingredients.map {|i| i.attributes }.should ==
-        old_ingredient_attributes + 
-        attributes.map {|attr| attr.merge({ 'recipe_id' => @recipe.id }) }
+        old_attributes + 
+        new_attributes.map {|attr| attr.merge({ 'recipe_id' => @recipe.id }) }
     end
   end
 
@@ -30,6 +36,32 @@ describe Recipe do
     it "must have a unique name" do
       Recipe.generate(:name => @recipe.name).errors.on(:name).should == 
         'has already been taken'
+    end
+  end
+
+  describe "a valid saved recipe with ingredients", :shared => true do
+    it "should edit existing saved ingredients" do
+      values = {}
+      old_attributes = @recipe.ingredients.map {|i| i.attributes }
+      @recipe.ingredients.each do |ingredient|
+        next if ingredient.new_record?
+        values[ingredient.id.to_s] = ingredient.attributes.merge({ 'percent' => 0 })
+      end
+      @recipe.ingredient_attributes = values
+      @recipe.ingredients.reject {|i| i.new_record?}.map {|i| i.attributes }.should ==
+        old_attributes.map {|attr| attr.merge({ 'percent' => 0 }) }
+    end
+
+    it "should delete an existing saved ingredient" do
+      new_ingredient_ids = @recipe.ingredient_ids[1..-1]
+      values = {}
+      new_ingredient_ids.each do |id|
+        attributes = Ingredient.find(id).attributes
+        attributes.delete('recipe_id')
+        values[id.to_s] = attributes
+      end
+      @recipe.ingredient_attributes = values
+      @recipe.ingredient_ids.should == new_ingredient_ids
     end
   end
 
@@ -62,10 +94,13 @@ describe Recipe do
   describe "a recipe with ingredients" do
     before(:each) do
       @recipe = Recipe.generate
-      3.times { @recipe.ingredients << Ingredient.generate }
+      3.times do
+        @recipe.ingredients.create(Ingredient.spawn.attributes.reject {|k, v| k == 'recipe_id' })
+      end
     end
 
     it_should_behave_like "all recipes"
     it_should_behave_like "a valid saved recipe"
+    it_should_behave_like "a valid saved recipe with ingredients"
   end
 end
