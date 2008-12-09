@@ -14,7 +14,8 @@ class Recipe < ActiveRecord::Base
     end
     values[:new].each do |attributes|
       next if attributes.values.all? {|value| value.blank? }
-      ingredients.build(attributes)
+      ingredient = ingredients.build(attributes)
+      ingredient.recipe = self
     end if values[:new]
   end
 
