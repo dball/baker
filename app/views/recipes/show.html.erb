@@ -1,1 +1,23 @@
 <% title @recipe.name %>
+<table id="ingredients">
+  <thead>
+    <tr>
+      <th>Ingredient</th>
+      <th>Percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recipe.ingredients.each do |ingredient| %>
+      <tr>
+        <td>
+          <% if ingredient.subrecipe %>
+            <%= link_to h(ingredient.subrecipe.name), ingredient.subrecipe %>
+          <% else %>
+            <%= ingredient.name %>
+          <% end %>
+        </td>
+        <td><%= ingredient.percent %>%</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
