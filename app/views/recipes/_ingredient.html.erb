@@ -5,11 +5,11 @@
         <%=h ingredient.subrecipe.name %>
         <%= fields.hidden_field :subrecipe_id %>
       <% else %>
-        <%= fields.text_field :name %>
+        <%= fields.text_field :name, :size => 20 %>
       <% end %>
     </td>
     <td>
-      <%= fields.text_field :percent %>
+      <%= fields.text_field :percent, :size => 5 %>
     </td>
     <td>
       <% if ingredient.new_record? %>
