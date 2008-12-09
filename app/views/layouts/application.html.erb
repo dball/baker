@@ -6,7 +6,7 @@
   <% title = yield(:title) %>
   <title>Baker<%= title.nil? ? '' : " - #{h(title)}" %></title>
   <%= stylesheets %>
-  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'jquery', 'application' %>
   <%= yield(:head) %>
 </head>
 <body>
