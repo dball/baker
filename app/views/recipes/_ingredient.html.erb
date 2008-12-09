@@ -12,7 +12,7 @@
       <%= fields.text_field :percent %>
     </td>
     <td>
-      <%= button_to('✖', '#') %>
+      <%= button_to_function('✖', "$(this).parents('.ingredient').remove()") %>
     </td>
   <% end %>
 <% end %>
