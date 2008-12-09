@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe 'recipes/edit.html.erb' do
   before(:each) do
-    assigns[:recipe] = @recipe = Recipe.generate
+    assigns[:recipe] = Recipe.generate
     render "/recipes/edit"
   end
 
