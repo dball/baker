@@ -1,6 +1,15 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Recipe do
+  describe "recipe class methods" do
+    it "should filter ingredient attributes" do
+      recipe = Recipe.generate
+      attributes = { :percent => 50, :name => recipe.name}
+      Recipe.filter_ingredient_attributes(attributes).should == 
+        { :percent => 50, :subrecipe_id => recipe.id }
+    end
+  end
+
   describe "all recipes", :shared => true do
     it "must have a name" do
       @recipe.name.class.should == String
