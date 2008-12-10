@@ -19,6 +19,10 @@ class Recipe < ActiveRecord::Base
     end if values[:new]
   end
 
+  def total_percent
+    ingredients.inject(0) {|sum, ingredient| sum += ingredient.percent }
+  end
+
   after_update do |recipe|
     recipe.ingredients.each { |ingredient| ingredient.save(false) }
   end

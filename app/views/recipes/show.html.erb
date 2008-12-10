@@ -3,7 +3,7 @@
   <thead>
     <tr>
       <th>Ingredient</th>
-      <th>Percent</th>
+      <th>%</th>
     </tr>
   </thead>
   <tbody>
@@ -16,8 +16,14 @@
             <%= ingredient.name %>
           <% end %>
         </td>
-        <td><%= ingredient.percent %>%</td>
+        <td class="percent"><%= ingredient.percent %></td>
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td>Total</td>
+      <td class="percent"><%= @recipe.total_percent %></td>
+    </tr>
+  </tfoot>
 </table>
