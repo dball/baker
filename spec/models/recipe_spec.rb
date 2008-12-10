@@ -35,6 +35,14 @@ describe Recipe do
         old_attributes + 
         new_attributes.map {|attr| attr.merge({ 'recipe_id' => @recipe.id }) }
     end
+
+    it "should have a total_percent of the sum of its ingredients" do
+      total_percent = 0
+      @recipe.ingredients.each do |ingredient|
+        total_percent += ingredient.percent
+      end
+      @recipe.total_percent.should == total_percent
+    end
   end
 
   describe "a valid saved recipe", :shared => true do
