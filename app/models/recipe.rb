@@ -4,6 +4,12 @@ class Recipe < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  attr_accessor :weight_unit
+
+  def weight_unit
+    @weight_unit || Unit.new({ :name => 'ounce', :abbr => 'oz', :kind => 'weight', :scale => 1 })
+  end
+
   def ingredient_attributes=(values)
     ingredients.reject(&:new_record?).each do |ingredient|
       if attributes = values[ingredient.id.to_s]

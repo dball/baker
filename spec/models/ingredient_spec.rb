@@ -13,6 +13,10 @@ describe Ingredient do
     it "must have a percent" do
       @ingredient.percent.class.should == BigDecimal
     end
+
+    it "must have a weight" do
+      @ingredient.weight.class.should == BigDecimal
+    end
   end
 
   describe "a simple ingredient" do

@@ -15,8 +15,22 @@ describe Recipe do
       @recipe.name.class.should == String
     end
 
+    it "must accept a name" do
+      x = @recipe.name = 'Foo'
+      @recipe.name.should == x
+    end
+
     it "must have ingredients" do
       @recipe.ingredients.map {|i| i.class }.all? {|c| c == Ingredient }.should be_true
+    end
+
+    it "must have a weight unit" do
+      @recipe.weight_unit.class.should == Unit
+    end
+
+    it "must accept a weight unit" do
+      x = @recipe.weight_unit = Unit.generate
+      @recipe.weight_unit.should == x
     end
 
     it "should add new ingredients" do

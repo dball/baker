@@ -4,7 +4,7 @@
     <tr>
       <th>Ingredient</th>
       <th>%</th>
-      <th><%=h @unit.abbr %></th>
+      <th><%=h @recipe.weight_unit.abbr %></th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +18,7 @@
           <% end %>
         </td>
         <td class="percent"><%= ingredient.percent %></td>
-        <td class="weight"><%= ingredient.percent * @recipe.default_unit_scale * @unit.scale / 100 %></td>
+        <td class="weight"><%= ingredient.weight %></td>
       </tr>
     <% end %>
   </tbody>
