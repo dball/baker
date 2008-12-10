@@ -79,4 +79,5 @@ jQuery.fn.alignAround = function(expr, ch) {
 $(document).ready(function() {
   $('#ingredients').find(':text').keydown(keyDownIngredient);
   $('#ingredients').alignAround('.percent', '.');
+  $('#ingredients').alignAround('.weight', '.');
 });

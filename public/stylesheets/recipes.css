@@ -1,4 +1,5 @@
-table#ingredients td.percent
+table#ingredients td.percent,
+table#ingredients td.weight
 {
   font-family: courier, fixed;
 }
