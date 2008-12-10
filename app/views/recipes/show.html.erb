@@ -1,4 +1,4 @@
-<% title @recipe.name %>
+<% title @recipe.name.titleize %>
 <table id="ingredients">
   <thead>
     <tr>
@@ -22,7 +22,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td>Total</td>
+      <td>TOTAL</td>
       <td class="percent"><%= @recipe.total_percent %></td>
     </tr>
   </tfoot>
