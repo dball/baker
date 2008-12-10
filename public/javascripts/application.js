@@ -32,6 +32,51 @@ function keyDownIngredient(event) {
   }
 }
 
+jQuery.fn.alignAround = function(expr, ch) {
+  var values = new Array();
+  var elements = this.find(expr);
+  for (var i=0; i<elements.length; i++) {
+    var el = $(elements[i]);
+    var text = el.text();
+    var splits = text.split(ch);
+    if (splits.length == 2) {
+      values[values.length] = splits;
+    } else {
+      values[values.length] = text;
+    }
+  }
+  var max_lengths = [0, 0];
+  for (var i=0; i<values.length; i++) {
+    var value = values[i];
+    if (value == 'string') {
+      continue;
+    }
+    for (var j=0; j < 2; j++) {
+      if (value[j].length > max_lengths[j]) {
+        max_lengths[j] = value[j].length;
+      }
+    }
+  }
+  for (var i=0; i<values.length; i++) {
+    var value = values[i];
+    if (value == 'string') {
+      continue;
+    }
+    var s = '';
+    for (var j=0; j<max_lengths[0] - value[0].length; j++) {
+      s += '\u00A0';
+    }
+    s += value[0];
+    s += ch;
+    s += value[1];
+    for (var j=0; j<max_lengths[1] - value[1].length; j++) {
+      s += '\u00A0';
+    }
+    $(elements[i]).text(s);
+  }
+}
+
 $(document).ready(function() {
   $('#ingredients').find(':text').keydown(keyDownIngredient);
+  $('#ingredients').alignAround('.percent', '.');
 });
