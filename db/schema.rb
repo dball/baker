@@ -21,13 +21,16 @@ ActiveRecord::Schema.define(:version => 20081202232900) do
   add_index "ingredients", ["recipe_id"], :name => "index_ingredients_on_recipe_id"
 
   create_table "recipes", :force => true do |t|
-    t.string "name", :limit => 40, :null => false
+    t.string  "name",               :limit => 40,                               :null => false
+    t.decimal "default_unit_scale",               :precision => 2, :scale => 5
+    t.text    "preparation"
   end
 
   create_table "units", :force => true do |t|
-    t.string "name", :limit => 40, :null => false
-    t.string "abbr", :limit => 10, :null => false
-    t.string "kind", :limit => 10, :null => false
+    t.string  "name",  :limit => 40,                               :null => false
+    t.string  "abbr",  :limit => 10,                               :null => false
+    t.string  "kind",  :limit => 10,                               :null => false
+    t.decimal "scale",               :precision => 4, :scale => 9, :null => false
   end
 
   add_index "units", ["abbr"], :name => "index_units_on_abbr", :unique => true

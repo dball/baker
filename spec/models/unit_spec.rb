@@ -13,6 +13,14 @@ describe Unit do
     it "must have a kind" do
       @unit.kind.class.should == String
     end
+
+    it "must have a scale" do
+      @unit.scale.class.should == BigDecimal
+    end
+
+    it "must have a positive scale" do
+      @unit.scale.should > 0
+    end
   end
 
   describe "a unit" do

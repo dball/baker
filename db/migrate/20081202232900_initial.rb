@@ -4,12 +4,15 @@ class Initial < ActiveRecord::Migration
       t.column :name, :string, :limit => 40, :null => false
       t.column :abbr, :string, :limit => 10, :null => false
       t.column :kind, :string, :limit => 10, :null => false
+      t.column :scale, :decimal, :scale => 9, :precision => 4, :null => false
     end
     add_index :units, :name, :unique => true
     add_index :units, :abbr, :unique => true
 
     create_table :recipes do |t|
       t.column :name, :string, :limit => 40, :null => false
+      t.column :default_unit_scale, :decimal, :scale => 5, :precision => 2
+      t.column :preparation, :text
     end
 
     create_table :ingredients do |t|
