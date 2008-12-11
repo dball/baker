@@ -2,7 +2,7 @@ ActiveRecord::Base.transaction do
   Unit.create({ :name => 'ounce', :abbr => 'oz', :kind => 'weight', :scale => 1 })
   Unit.create({ :name => 'pound', :abbr => 'lb', :kind => 'weight', :scale => 0.0625 })
   Unit.create({ :name => 'gram', :abbr => 'g', :kind => 'weight', :scale => 28.3495 })
-  Unit.create({ :name => 'kilogram', :abbr => 'kg', :kind => 'weight', :scale => 28349.5 })
+  Unit.create({ :name => 'kilogram', :abbr => 'kg', :kind => 'weight', :scale => 0.0283495 })
   
   Unit.create({ :name => 'cup', :abbr => 'cup', :kind => 'volume', :scale => 1 })
   Unit.create({ :name => 'fluid ounce', :abbr => 'fl oz', :kind => 'volume', :scale => 8 })
