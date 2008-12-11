@@ -4,10 +4,14 @@ class Recipe < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
-  attr_accessor :weight_unit
+  attr_accessor :weight_unit, :scale
 
   def weight_unit
-    @weight_unit || Unit.new({ :name => 'ounce', :abbr => 'oz', :kind => 'weight', :scale => 1 })
+    @weight_unit ||= Unit.new({ :name => 'ounce', :abbr => 'oz', :kind => 'weight', :scale => 1 })
+  end
+
+  def scale
+    @scale ||= 1
   end
 
   def ingredient_attributes=(values)

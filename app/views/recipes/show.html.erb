@@ -10,6 +10,8 @@
             <select name="weight_unit">
               <%= options_from_collection_for_select(@weight_units, :id, :abbr, @recipe.weight_unit.id) %>
             </select>
+            <label for="scale">Scale:</label>
+            <%= text_field_tag(:scale, sprintf('%g', @recipe.scale), :size => 3) %>
           </div>
         <% end %>
       </th>

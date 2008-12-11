@@ -5,6 +5,6 @@ class Ingredient < ActiveRecord::Base
   validates_presence_of :recipe
 
   def weight
-    percent * recipe.default_unit_scale * recipe.weight_unit.scale / 100
+    percent * recipe.scale * recipe.default_unit_scale * recipe.weight_unit.scale / 100
   end
 end
