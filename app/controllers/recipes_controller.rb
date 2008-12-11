@@ -4,6 +4,8 @@ class RecipesController < ResourceController::Base
     if params[:weight_unit]
       @recipe.weight_unit = Unit.find(params[:weight_unit])
     end
+    # FIXME - One would think eagerly loading children would set the parent
+    # at that time. One would be incorrect.
     @recipe.ingredients.each do |ingredient|
       ingredient.recipe = @recipe
     end
