@@ -13,7 +13,7 @@ ActiveRecord::Schema.define(:version => 20081202232900) do
 
   create_table "ingredients", :force => true do |t|
     t.string  "name",         :limit => 40,                               :null => false
-    t.decimal "percent",                    :precision => 3, :scale => 6, :null => false
+    t.decimal "percent",                    :precision => 6, :scale => 3, :null => false
     t.integer "recipe_id",                                                :null => false
     t.integer "subrecipe_id"
   end
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20081202232900) do
 
   create_table "recipes", :force => true do |t|
     t.string  "name",               :limit => 40,                               :null => false
-    t.decimal "default_unit_scale",               :precision => 2, :scale => 5
+    t.decimal "default_unit_scale",               :precision => 5, :scale => 2
     t.text    "preparation"
   end
 
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20081202232900) do
     t.string  "name",  :limit => 40,                               :null => false
     t.string  "abbr",  :limit => 10,                               :null => false
     t.string  "kind",  :limit => 10,                               :null => false
-    t.decimal "scale",               :precision => 4, :scale => 9, :null => false
+    t.decimal "scale",               :precision => 9, :scale => 4, :null => false
   end
 
   add_index "units", ["abbr"], :name => "index_units_on_abbr", :unique => true
