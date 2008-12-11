@@ -80,4 +80,7 @@ $(document).ready(function() {
   $('#ingredients').find(':text').keydown(keyDownIngredient);
   $('#ingredients').alignAround('.percent', '.');
   $('#ingredients').alignAround('.weight', '.');
+  $('.autosubmit select').change(function() {
+    this.form.submit();
+  });
 });

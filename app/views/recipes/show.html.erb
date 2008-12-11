@@ -4,7 +4,15 @@
     <tr>
       <th>Ingredient</th>
       <th>%</th>
-      <th><%=h @recipe.weight_unit.abbr %></th>
+      <th>
+        <% form_tag(@recipe, :method => :get, :class => 'autosubmit') do %>
+          <div style="display: inline">
+            <select name="weight_unit">
+              <%= options_from_collection_for_select(@weight_units, :id, :abbr, @recipe.weight_unit.id) %>
+            </select>
+          </div>
+        <% end %>
+      </th>
     </tr>
   </thead>
   <tbody>
