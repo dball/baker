@@ -14,6 +14,7 @@ class RecipesController < ResourceController::Base
   private
 
   def object
-    @object ||= Recipe.find(:first, :conditions => {:id => params[:id]}, :include => :ingredients)
+    @object ||= Recipe.find(param, :include => :ingredients) unless param.nil?
+    @object
   end
 end
