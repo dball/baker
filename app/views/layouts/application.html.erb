@@ -3,18 +3,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <% title = yield(:title) %>
-  <title>Baker<%= title.nil? ? '' : " - #{h(title)}" %></title>
+  <% subtitle = yield(:title) %>
+  <% title = 'bake.rb' + (subtitle.nil? ? '' : " #{h(subtitle)}") %>
+  <title><%= title %>
+  <%= stylesheet_link_tag 'reset' %>
   <%= stylesheets %>
-  <%= javascript_include_tag 'jquery', 'application' %>
+  <%= javascript_include_tag 'jquery', 'jquery.corner', 'application' %>
   <%= yield(:head) %>
 </head>
 <body>
+  <div id="header">
+    <h1>$ <%= title %></h1>
+  </div>
   <div id="content">
-    <% if title %>
-      <h1><%=h title %></h1>
-    <% end %>
-    <%= yield %>
+    <div id="main">
+      <%= yield %>
+    </div>
   </div>
 </body>
 </html>
