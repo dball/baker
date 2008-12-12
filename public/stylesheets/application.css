@@ -10,14 +10,14 @@ body
 {
   font-size: 150%;
   background: #cc8822;
-  padding: 0.5em;
+  padding: 15px;
   padding-top: 0px;
   margin-bottom: 1em;
 }
 
 #header h1
 {
-  padding: 0.75em;
+  padding: 15px;
   background: #ffffcc;
   font-family: courier, fixed;
   font-weight: normal;
@@ -26,7 +26,7 @@ body
 #content
 {
   background: #cc8822;
-  padding: 0.5em;
+  padding: 15px;
 }
 
 #content #main

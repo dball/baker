@@ -78,8 +78,9 @@ jQuery.fn.alignAround = function(expr, ch) {
 
 $(document).ready(function() {
   $('#header').corner('bottom 20px');
-  $('#header h1').corner('bottom 20px');
+  $('#header h1').corner('bottom 15px');
   $('#content').corner('20px');
+  $('#content #main').corner('15px');
   $('#ingredients').find(':text').keydown(keyDownIngredient);
   $('#ingredients').alignAround('.percent', '.');
   $('#ingredients').alignAround('.weight', '.');
