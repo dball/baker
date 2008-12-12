@@ -1,3 +1,28 @@
+table#ingredients
+{
+  empty-cells: show;
+  border-collapse: collapse;
+}
+table#ingredients td
+{
+  border: 1px solid #cc8822;
+  padding: 0.25em;
+}
+
+table#ingredients thead
+{
+  border: 1px solid #cc8822;
+  background: #fff;
+}
+
+table#ingredients th
+{
+  padding: 0.25em 0.5em;
+  font-variant: small-caps;
+  font-size: 80%;
+  text-align: right;
+}
+
 table#ingredients td.percent,
 table#ingredients td.weight
 {

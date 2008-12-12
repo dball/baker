@@ -33,6 +33,10 @@ class Recipe < ActiveRecord::Base
     ingredients.inject(0) {|sum, ingredient| sum += ingredient.percent }
   end
 
+  def total_weight
+    ingredients.inject(0) {|sum, ingredient| sum += ingredient.weight }
+  end
+
   after_update do |recipe|
     recipe.ingredients.each { |ingredient| ingredient.save(false) }
   end

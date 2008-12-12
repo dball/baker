@@ -1,19 +1,19 @@
 <% title 'recipes ' + @recipe.name.titleize.to_json %>
+<% form_tag(@recipe, :method => :get, :class => 'autosubmit') do %>
 <table id="ingredients">
   <thead>
     <tr>
       <th>Ingredient</th>
-      <th>%</th>
+      <th>Percent</th>
       <th>
-        <% form_tag(@recipe, :method => :get, :class => 'autosubmit') do %>
-          <div style="display: inline">
-            <select name="weight_unit">
-              <%= options_from_collection_for_select(@weight_units, :id, :abbr, @recipe.weight_unit.id) %>
-            </select>
-            <label for="scale">Scale:</label>
-            <%= text_field_tag(:scale, sprintf('%g', @recipe.scale), :size => 3) %>
-          </div>
-        <% end %>
+        <label for="weight_unit">Unit:</label>
+        <select name="weight_unit">
+          <%= options_from_collection_for_select(@weight_units, :id, :abbr, @recipe.weight_unit.id) %>
+        </select>
+      </th>
+      <th>
+        <label for="scale">Scale:</label>
+        <%= text_field_tag(:scale, sprintf('%g', @recipe.scale), :size => 3) %>
       </th>
     </tr>
   </thead>
@@ -28,7 +28,7 @@
           <% end %>
         </td>
         <td class="percent"><%= ingredient.percent %></td>
-        <td class="weight"><%= ingredient.weight %></td>
+        <td colspan="2" class="weight"><%= ingredient.weight %></td>
       </tr>
     <% end %>
   </tbody>
@@ -36,6 +36,8 @@
     <tr>
       <td>TOTAL</td>
       <td class="percent"><%= @recipe.total_percent %></td>
+      <td colspan="2" class="weight"><%= @recipe.total_weight %></td>
     </tr>
   </tfoot>
 </table>
+<% end %>
