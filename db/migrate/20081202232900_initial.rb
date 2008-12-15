@@ -18,9 +18,9 @@ class Initial < ActiveRecord::Migration
     end
 
     create_table :ingredients do |t|
-      t.column :name, :string, :limit => 40, :null => false
       t.column :percent, :decimal, :scale => 3, :precision => 6, :null => false
       t.column :recipe_id, :integer, :null => false
+      t.column :name, :string, :limit => 40
       t.column :subrecipe_id, :integer
     end
 
