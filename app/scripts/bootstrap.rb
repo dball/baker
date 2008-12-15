@@ -47,4 +47,17 @@ ActiveRecord::Base.transaction do
       { :name => 'salt', :percent => 1.9 },
       { :name => 'yeast', :percent => 0.55 }
     ]}})
+
+  Recipe.create({ :name => 'french bread', :default_unit_scale => 10,
+    :preparation => 'Remove the pâte fermentée dough from the refrigerator, cut until a dozen pieces, and let sit covered for an hour. Mix the flour, salt, yeast, and dough pieces, then add the water, stirring until it forms a rough dough. Knead until pliable and tacky, 78-80°. Oil, cover, and let rise 2 hours or until doubled. Shape, proof, and bake at 450° for 20-30 minutes.',
+    :source => 'The Bread Baker\'s Apprentice',
+    :source_page => 170,
+    :ingredient_attributes => { :new => [
+      { :name => 'pâte fermentée', :subrecipe_id => Recipe.find_by_name!('pâte fermentée').id, :percent => 160 },
+      { :name => 'all-purpose flour', :percent => 50 },
+      { :name => 'bread flour', :percent => 50 },
+      { :name => 'water', :percent => 65 },
+      { :name => 'salt', :percent => 1.9 },
+      { :name => 'yeast', :percent => 0.55 }
+    ]}})
 end
