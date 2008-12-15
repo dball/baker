@@ -17,4 +17,8 @@ module ApplicationHelper
     html = model.new_record? ? {} : { :method => :put }
     form_for(name, model, options.merge({ :url => url, :html => html }), &block)
   end
+
+  def argumentize(title)
+    /\s/.match(title) ? '"' + title + '"' : title
+  end
 end

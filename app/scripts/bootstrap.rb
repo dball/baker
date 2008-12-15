@@ -1,3 +1,6 @@
+Recipe.delete_all
+Unit.delete_all
+
 ActiveRecord::Base.transaction do
   Unit.create({ :name => 'ounce', :abbr => 'oz', :kind => 'weight', :scale => 1 })
   Unit.create({ :name => 'pound', :abbr => 'lb', :kind => 'weight', :scale => 0.0625 })
@@ -15,6 +18,9 @@ ActiveRecord::Base.transaction do
   Unit.create({ :name => 'dash', :abbr => 'dash', :kind => 'volume', :scale => 768 })
   
   Recipe.create({ :name => 'poolish', :default_unit_scale => 11.25,
+    :preparation => 'Stir until flour is fully hydrated, cover, then ferment for 3 to 4 hours. Retard overnight or up to three days in the refrigerator.',
+    :source => 'The Bread Baker\'s Apprentice',
+    :source_page => 106,
     :ingredient_attributes => { :new => [
       { :name => 'bread flour', :percent => 100 },
       { :name => 'water', :percent => 107 },
@@ -22,9 +28,23 @@ ActiveRecord::Base.transaction do
     ]}})
   
   Recipe.create({ :name => 'biga', :default_unit_scale => 11.25,
+    :preparation => 'Combine the flour and yeast, then add the water, stirring until it forms a rough dough. Knead until pliable and tacky, 78-80°. Cover and ferment 3 hours or until doubled. Retard overnight or up to three days in the refrigerator.',
+    :source => 'The Bread Baker\'s Apprentice',
+    :source_page => 107,
     :ingredient_attributes => { :new => [
       { :name => 'bread flour', :percent => 100 },
       { :name => 'water', :percent => 66.7 },
       { :name => 'yeast', :percent => 0.49 }
+    ]}})
+
+  Recipe.create({ :name => 'pâte fermentée', :default_unit_scale => 11.25,
+    :preparation => 'Combine the flour, salt, and yeast, then add the water, stirring until it forms a rough dough. Knead until pliable and tacky, 78-80°. Cover and ferment 1 hour or until 150% of its original volume. Retard overnight or up to three days in the refrigerator, or three months in the freezer.',
+    :source => 'The Bread Baker\'s Apprentice',
+    :source_page => 105,
+    :ingredient_attributes => { :new => [
+      { :name => 'bread flour', :percent => 100 },
+      { :name => 'water', :percent => 65 },
+      { :name => 'salt', :percent => 1.9 },
+      { :name => 'yeast', :percent => 0.55 }
     ]}})
 end

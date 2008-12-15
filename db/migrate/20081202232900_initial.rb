@@ -13,6 +13,8 @@ class Initial < ActiveRecord::Migration
       t.column :name, :string, :limit => 40, :null => false
       t.column :default_unit_scale, :decimal, :scale => 2, :precision => 5
       t.column :preparation, :text
+      t.column :source, :string
+      t.column :source_page, :integer
     end
 
     create_table :ingredients do |t|

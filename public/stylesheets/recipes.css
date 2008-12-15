@@ -2,6 +2,9 @@ table#ingredients
 {
   empty-cells: show;
   border-collapse: collapse;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  float: left;
 }
 table#ingredients td
 {
@@ -27,4 +30,13 @@ table#ingredients td.percent,
 table#ingredients td.weight
 {
   font-family: courier, fixed;
+}
+
+p#source
+{
+  clear: left;
+}
+
+p
+{
 }

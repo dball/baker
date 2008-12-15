@@ -1,43 +1,56 @@
-<% title 'recipes ' + @recipe.name.titleize.to_json %>
+<% title 'recipes ' + argumentize(@recipe.name.titleize) %>
 <% form_tag(@recipe, :method => :get, :class => 'autosubmit') do %>
-<table id="ingredients">
-  <thead>
-    <tr>
-      <th>Ingredient</th>
-      <th>Percent</th>
-      <th>
-        <label for="weight_unit">Unit:</label>
-        <select name="weight_unit">
-          <%= options_from_collection_for_select(@weight_units, :id, :abbr, @recipe.weight_unit.id) %>
-        </select>
-      </th>
-      <th>
-        <label for="scale">Scale:</label>
-        <%= text_field_tag(:scale, sprintf('%g', @recipe.scale), :size => 3) %>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @recipe.ingredients.each do |ingredient| %>
+  <table id="ingredients">
+    <thead>
       <tr>
-        <td>
-          <% if ingredient.subrecipe %>
-            <%= link_to h(ingredient.subrecipe.name), ingredient.subrecipe %>
-          <% else %>
-            <%= ingredient.name %>
-          <% end %>
-        </td>
-        <td class="percent"><%= ingredient.percent %></td>
-        <td colspan="2" class="weight"><%= ingredient.weight %></td>
+        <th>Ingredient</th>
+        <th>Percent</th>
+        <th>
+          <label for="weight_unit">Unit:</label>
+          <select name="weight_unit">
+            <%= options_from_collection_for_select(@weight_units, :id, :abbr, @recipe.weight_unit.id) %>
+          </select>
+        </th>
+        <th>
+          <label for="scale">Scale:</label>
+          <%= text_field_tag(:scale, sprintf('%g', @recipe.scale), :size => 3) %>
+        </th>
       </tr>
-    <% end %>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td>TOTAL</td>
-      <td class="percent"><%= @recipe.total_percent %></td>
-      <td colspan="2" class="weight"><%= @recipe.total_weight %></td>
-    </tr>
-  </tfoot>
-</table>
+    </thead>
+    <tbody>
+      <% @recipe.ingredients.each do |ingredient| %>
+        <tr>
+          <td>
+            <% if ingredient.subrecipe %>
+              <%= link_to h(ingredient.subrecipe.name), ingredient.subrecipe %>
+            <% else %>
+              <%= ingredient.name %>
+            <% end %>
+          </td>
+          <td class="percent"><%= ingredient.percent %></td>
+          <td colspan="2" class="weight"><%= ingredient.weight %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>TOTAL</td>
+        <td class="percent"><%= @recipe.total_percent %></td>
+        <td colspan="2" class="weight"><%= @recipe.total_weight %></td>
+      </tr>
+    </tfoot>
+  </table>
 <% end %>
+<% if !@recipe.preparation.blank? %>
+  <p id="preparation">
+    <%=h @recipe.preparation %>
+  </p>
+<% end %>
+<p id="source">
+  <% if @recipe.source %>
+    <%=h @recipe.source %>
+    <% if @recipe.source_page %>
+      page <%= @recipe.source_page %>
+    <% end %>
+  <% end %>
+</p>
