@@ -9,6 +9,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20081202232900) do
+
+  create_table "ingredients", :force => true do |t|
+    t.decimal "percent",                    :precision => 6, :scale => 3, :null => false
+    t.integer "recipe_id",                                                :null => false
+    t.string  "name",         :limit => 40
+    t.integer "subrecipe_id"
+  end
+
+  add_index "ingredients", ["recipe_id"], :name => "index_ingredients_on_recipe_id"
+
+  create_table "recipes", :force => true do |t|
+    t.string  "name",               :limit => 40,                               :null => false
+    t.decimal "default_unit_scale",               :precision => 5, :scale => 2
+    t.text    "preparation"
+    t.string  "source"
+    t.integer "source_page"
+  end
+
+  create_table "units", :force => true do |t|
+    t.string  "name",  :limit => 40,                               :null => false
+    t.string  "abbr",  :limit => 10,                               :null => false
+    t.string  "kind",  :limit => 10,                               :null => false
+    t.decimal "scale",               :precision => 9, :scale => 4, :null => false
+  end
+
+  add_index "units", ["abbr"], :name => "index_units_on_abbr", :unique => true
+  add_index "units", ["name"], :name => "index_units_on_name", :unique => true
 
 end
