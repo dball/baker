@@ -23,6 +23,17 @@ body
   font-weight: normal;
 }
 
+#header h1 a
+{
+  text-decoration: none;
+  color: inherit;
+}
+
+#header h1 a.highlight
+{
+  color: #555;
+}
+
 #content
 {
   background: #cc8822;

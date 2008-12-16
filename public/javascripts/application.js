@@ -87,4 +87,20 @@ $(document).ready(function() {
   $('.autosubmit :input').change(function() {
     this.form.submit();
   });
+  $('#header h1 a').hover(
+    function() {
+      $(this).addClass('highlight');
+      var index = $('#header h1 a').index(this);
+      if (index > 0) {
+        $('#header h1 a:lt(' + index + ')').addClass('highlight');
+      }
+    },
+    function() {
+      $(this).removeClass('highlight');
+      var index = $('#header h1 a').index(this);
+      if (index > 0) {
+        $('#header h1 a:lt(' + index + ')').removeClass('highlight');
+      }
+    }
+  );
 });
