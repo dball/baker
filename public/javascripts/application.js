@@ -42,15 +42,15 @@ jQuery.fn.alignAround = function(expr, ch) {
     if (splits.length == 2) {
       values[values.length] = splits;
     } else {
-      values[values.length] = text;
+      splits = new Array();
+      splits[0] = text;
+      splits[1] = '';
+      values[values.length] = splits;
     }
   }
   var max_lengths = [0, 0];
   for (var i=0; i<values.length; i++) {
     var value = values[i];
-    if (value == 'string') {
-      continue;
-    }
     for (var j=0; j < 2; j++) {
       if (value[j].length > max_lengths[j]) {
         max_lengths[j] = value[j].length;
@@ -59,18 +59,21 @@ jQuery.fn.alignAround = function(expr, ch) {
   }
   for (var i=0; i<values.length; i++) {
     var value = values[i];
-    if (value == 'string') {
-      continue;
-    }
     var s = '';
     for (var j=0; j<max_lengths[0] - value[0].length; j++) {
       s += '\u00A0';
     }
     s += value[0];
-    s += ch;
-    s += value[1];
-    for (var j=0; j<max_lengths[1] - value[1].length; j++) {
-      s += '\u00A0';
+    if (value[1] == '') {
+      for (j=0; j<=max_lengths[1] - value[1].length; j++) {
+        s += '\u00A0';
+      }
+    } else {
+      s += ch;
+      s += value[1];
+      for (var j=0; j<max_lengths[1] - value[1].length; j++) {
+        s += '\u00A0';
+      }
     }
     $(elements[i]).text(s);
   }
