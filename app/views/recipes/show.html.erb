@@ -27,7 +27,6 @@
       <tr>
         <td>TOTAL</td>
         <td class="percent"><%= @recipe.total_percent %></td>
-        <td colspan="2" class="weight"><%= @recipe.total_weight %></td>
       </tr>
     </tfoot>
     <tbody>
@@ -41,7 +40,7 @@
             <% end %>
           </td>
           <td class="percent"><%= ingredient.percent %></td>
-          <td colspan="2" class="weight"><%= ingredient.weight %></td>
+          <td colspan="2" class="weight"><%= sprintf('%.3g', ingredient.weight) %></td>
         </tr>
       <% end %>
     </tbody>
