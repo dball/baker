@@ -1,4 +1,10 @@
-<% title 'recipes ' + argumentize(@recipe.name.titleize) %>
+<% breadcrumb(argumentize(@recipe.name.titleize), @recipe) %>
+<% if @recipe.weight_unit.abbr != Recipe.default_weight_unit.abbr %>
+  <% breadcrumb "unit=#{@recipe.weight_unit.abbr}" %>
+<% end %>
+<% if @recipe.scale != 1 %>
+  <% breadcrumb "scale=#{@recipe.scale}" %>
+<% end %>
 <% form_tag(@recipe, :method => :get, :class => 'autosubmit') do %>
   <table id="ingredients">
     <thead>

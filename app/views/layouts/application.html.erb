@@ -3,9 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <% subtitle = yield(:title) %>
-  <% title = 'bake.rb' + (subtitle.nil? ? '' : " #{h(subtitle)}") %>
-  <title><%= title %>
+  <title><%= breadcrumbs_title %></title>
   <%= stylesheet_link_tag 'reset' %>
   <%= stylesheets %>
   <%= javascript_include_tag 'jquery', 'jquery.corner', 'application' %>
@@ -13,7 +11,7 @@
 </head>
 <body>
   <div id="header">
-    <h1>$ <%= title %></h1>
+    <h1>$ <%= breadcrumbs_links %></h1>
   </div>
   <div id="content">
     <div id="main">
