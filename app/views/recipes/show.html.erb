@@ -13,7 +13,7 @@
         <th>Percent</th>
         <th>
           <label for="weight_unit">Unit:</label>
-          <select name="weight_unit">
+          <select name="weight_unit" id="weight_unit">
             <%= options_from_collection_for_select(@weight_units, :id, :abbr, @recipe.weight_unit.id) %>
           </select>
         </th>
@@ -23,6 +23,13 @@
         </th>
       </tr>
     </thead>
+    <tfoot>
+      <tr>
+        <td>TOTAL</td>
+        <td class="percent"><%= @recipe.total_percent %></td>
+        <td colspan="2" class="weight"><%= @recipe.total_weight %></td>
+      </tr>
+    </tfoot>
     <tbody>
       <% @recipe.ingredients.each do |ingredient| %>
         <tr>
@@ -38,13 +45,6 @@
         </tr>
       <% end %>
     </tbody>
-    <tfoot>
-      <tr>
-        <td>TOTAL</td>
-        <td class="percent"><%= @recipe.total_percent %></td>
-        <td colspan="2" class="weight"><%= @recipe.total_weight %></td>
-      </tr>
-    </tfoot>
   </table>
 <% end %>
 <% if !@recipe.preparation.blank? %>
