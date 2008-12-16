@@ -6,8 +6,12 @@ class Recipe < ActiveRecord::Base
 
   attr_accessor :weight_unit, :scale
 
+  def Recipe.default_weight_unit
+    Unit.new({ :name => 'ounce', :abbr => 'oz', :kind => 'weight', :scale => 1 })
+  end
+
   def weight_unit
-    @weight_unit ||= Unit.new({ :name => 'ounce', :abbr => 'oz', :kind => 'weight', :scale => 1 })
+    @weight_unit ||= Recipe.default_weight_unit
   end
 
   def scale
