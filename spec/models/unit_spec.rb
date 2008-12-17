@@ -21,6 +21,10 @@ describe Unit do
     it "must have a positive scale" do
       @unit.scale.should > 0
     end
+
+    it "must be able to format a quantity" do
+      @unit.format(1).class.should == String
+    end
   end
 
   describe "a unit" do
@@ -29,6 +33,30 @@ describe Unit do
     end
     
     it_should_behave_like "all units"
+  end
+
+  describe "formatting quantities" do
+    before(:all) do
+      @inch = Unit.generate({ :name => 'inch', :abbr => 'in', :family => 'us', :kind => 'distance', :scale => 12 })
+      @foot = Unit.generate({ :name => 'foot', :abbr => 'ft', :family => 'us', :kind => 'distance', :scale => 1 })
+      @yard = Unit.generate({ :name => 'yard', :abbr => 'yd', :family => 'us', :kind => 'distance', :scale => 0.333 })
+    end
+
+    it "1 foot should format as 1 ft" do
+      @foot.format(1).should == '1 ft'
+    end
+
+    it "2 feet should format as 2 ft" do
+      @foot.format(2).should == '2 ft'
+    end
+
+    it "0.5 feet should format as 6 in" do
+      @foot.format(0.5).should == '6 in'
+    end
+
+    it "0.333 yards should format as 1 ft" do
+      @yard.format(0.333).should == '1 ft'
+    end
   end
 
   describe "converting between units" do
