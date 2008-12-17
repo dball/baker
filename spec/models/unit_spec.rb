@@ -42,6 +42,12 @@ describe Unit do
       @yard = Unit.generate({ :name => 'yard', :abbr => 'yd', :family => 'us', :kind => 'distance', :scale => 0.333 })
     end
 
+    it "smaller units" do
+      @yard.smaller_units.should == [@foot, @inch]
+      @foot.smaller_units.should == [@inch]
+      @inch.smaller_units.should == []
+    end
+
     it "1 foot should format as 1 ft" do
       @foot.format(1).should == '1 ft'
     end
@@ -56,6 +62,10 @@ describe Unit do
 
     it "0.333 yards should format as 1 ft" do
       @yard.format(0.333).should == '1 ft'
+    end
+
+    it "0.1667 yards should format as 6 in" do
+      @yard.format(0.1667).should == '6 in'
     end
   end
 
