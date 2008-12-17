@@ -2,21 +2,21 @@ Recipe.delete_all
 Unit.delete_all
 
 ActiveRecord::Base.transaction do
-  Unit.create({ :name => 'ounce', :abbr => 'oz', :kind => 'weight', :scale => 1 })
-  Unit.create({ :name => 'pound', :abbr => 'lb', :kind => 'weight', :scale => 0.0625 })
-  Unit.create({ :name => 'gram', :abbr => 'g', :kind => 'weight', :scale => 28.3495 })
-  Unit.create({ :name => 'kilogram', :abbr => 'kg', :kind => 'weight', :scale => 0.0283495 })
+  Unit.create({ :name => 'ounce', :abbr => 'oz', :kind => 'weight', :family => 'us', :scale => 1 })
+  Unit.create({ :name => 'pound', :abbr => 'lb', :kind => 'weight', :family => 'us', :scale => 0.0625 })
+  Unit.create({ :name => 'gram', :abbr => 'g', :kind => 'weight', :family => 'metric', :scale => 28.3495 })
+  Unit.create({ :name => 'kilogram', :abbr => 'kg', :kind => 'weight', :family => 'metric', :scale => 0.0283495 })
   
-  Unit.create({ :name => 'cup', :abbr => 'cup', :kind => 'volume', :scale => 1 })
-  Unit.create({ :name => 'fluid ounce', :abbr => 'fl oz', :kind => 'volume', :scale => 8 })
-  Unit.create({ :name => 'pint', :abbr => 'pt', :kind => 'volume', :scale => 0.5 })
-  Unit.create({ :name => 'quart', :abbr => 'qt', :kind => 'volume', :scale => 0.25 })
-  Unit.create({ :name => 'gallon', :abbr => 'gallon', :kind => 'volume', :scale => 0.0625 })
-  Unit.create({ :name => 'tablespoon', :abbr => 'tbsp', :kind => 'volume', :scale => 16 })
-  Unit.create({ :name => 'teaspoon', :abbr => 'tsp', :kind => 'volume', :scale => 48 })
-  Unit.create({ :name => 'pinch', :abbr => 'pinch', :kind => 'volume', :scale => 384 })
-  Unit.create({ :name => 'dash', :abbr => 'dash', :kind => 'volume', :scale => 768 })
-  
+  Unit.create({ :name => 'cup', :abbr => 'cup', :kind => 'volume', :family => 'us', :scale => 1 })
+  Unit.create({ :name => 'fluid ounce', :abbr => 'fl oz', :kind => 'volume', :family => 'us', :scale => 8 })
+  Unit.create({ :name => 'pint', :abbr => 'pt', :kind => 'volume', :family => 'us', :scale => 0.5 })
+  Unit.create({ :name => 'quart', :abbr => 'qt', :kind => 'volume', :family => 'us', :scale => 0.25 })
+  Unit.create({ :name => 'gallon', :abbr => 'gallon', :kind => 'volume', :family => 'us', :scale => 0.0625 })
+  Unit.create({ :name => 'tablespoon', :abbr => 'tbsp', :kind => 'volume', :family => 'us', :scale => 16 })
+  Unit.create({ :name => 'teaspoon', :abbr => 'tsp', :kind => 'volume', :family => 'us', :scale => 48 })
+  Unit.create({ :name => 'pinch', :abbr => 'pinch', :kind => 'volume', :family => 'us', :scale => 384 })
+  Unit.create({ :name => 'dash', :abbr => 'dash', :kind => 'volume', :family => 'us', :scale => 768 })
+
   Recipe.create({ :name => 'poolish', :default_unit_scale => 11.25,
     :preparation => 'Stir until flour is fully hydrated, cover, then ferment for 3 to 4 hours. Retard overnight or up to three days in the refrigerator.',
     :source => 'The Bread Baker\'s Apprentice',

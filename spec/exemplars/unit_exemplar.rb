@@ -6,4 +6,8 @@ class Unit
   generator_for :kind, :start => 'volume' do |prev|
     KINDS.reject {|k| k == prev}.first
   end
+  FAMILIES = ['us', 'metric']
+  generator_for :family, :start => 'us' do |prev|
+    FAMILIES.reject {|k| k == prev}.first
+  end
 end

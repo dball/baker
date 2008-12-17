@@ -28,14 +28,17 @@ ActiveRecord::Schema.define(:version => 20081202232900) do
     t.integer "source_page"
   end
 
+  add_index "recipes", ["name"], :name => "index_recipes_on_name"
+
   create_table "units", :force => true do |t|
-    t.string  "name",  :limit => 40,                               :null => false
-    t.string  "abbr",  :limit => 10,                               :null => false
-    t.string  "kind",  :limit => 10,                               :null => false
-    t.decimal "scale",               :precision => 9, :scale => 4, :null => false
+    t.string  "name",   :limit => 40,                               :null => false
+    t.string  "abbr",   :limit => 10,                               :null => false
+    t.string  "kind",   :limit => 10,                               :null => false
+    t.string  "family", :limit => 10,                               :null => false
+    t.decimal "scale",                :precision => 9, :scale => 4, :null => false
   end
 
-  add_index "units", ["abbr"], :name => "index_units_on_abbr", :unique => true
-  add_index "units", ["name"], :name => "index_units_on_name", :unique => true
+  add_index "units", ["abbr", "family"], :name => "index_units_on_abbr_and_family", :unique => true
+  add_index "units", ["name", "family"], :name => "index_units_on_name_and_family", :unique => true
 
 end
