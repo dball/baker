@@ -4,6 +4,12 @@ class Recipe < ActiveRecord::Base
 
   has_many :ingredients, :dependent => :destroy
 
+  attr_accessor :scale
+
+  def scale
+    @scale ||= 1
+  end
+
   def base_weight
     @base_weight ||= Unit(self[:base_weight])
   end

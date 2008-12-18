@@ -1,4 +1,7 @@
 <% breadcrumb(argumentize(@recipe.name.titleize), @recipe) %>
+<% if @recipe.scale != 1 %>
+  <% breadcrumb(sprintf("scale=%g", @recipe.scale)) %>
+<% end %>
 <% form_tag(@recipe, :method => :get, :class => 'autosubmit') do %>
   <table id="ingredients">
     <thead>
@@ -14,7 +17,7 @@
         </th>
         <th>
           <label for="scale">Scale:</label>
-          <%# text_field_tag(:scale, sprintf('%g', @recipe.scale), :size => 3) %>
+          <%= text_field_tag(:scale, sprintf('%g', @recipe.scale), :size => 3) %>
         </th>
       </tr>
     </thead>
