@@ -5,6 +5,26 @@ class Ingredient < ActiveRecord::Base
   validates_presence_of :recipe
 
   def weight
-    recipe.base_weight * (percent / 100)
+    Weight.new(self)
+  end
+
+  class Weight
+    def initialize(ingredient)
+      @ingredient = ingredient
+    end
+
+    def value
+      @value ||= @ingredient.recipe.base_weight * (@ingredient.percent / 100)
+    end
+
+    def to_s
+      scalar = value.scalar.nearest(1/8)
+      if scalar == 0
+        value.to_s
+      else
+        scalar = (scalar.is_a?(Rational) ? scalar.to_s(:split) : scalar.to_s)
+        scalar + ' ' + value.units
+      end
+    end
   end
 end

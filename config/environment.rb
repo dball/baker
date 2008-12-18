@@ -3,7 +3,6 @@ RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  require 'almost'
   config.gem 'ruby-units'
   config.time_zone = 'UTC'
   config.action_controller.session = {
@@ -11,3 +10,5 @@ Rails::Initializer.run do |config|
     :secret      => 'f9f0287e5a95154c0a2672750ca3fb2cfd1eb89e9ff409c4a1ed9c247b267051f794f6db413d45dd844bff702b3086c61fce4d4d1450ae14d95cc210dee515e6'
   }
 end
+
+require 'almost'

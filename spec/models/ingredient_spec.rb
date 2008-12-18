@@ -15,7 +15,8 @@ describe Ingredient do
     end
 
     it "must have a weight" do
-      @ingredient.weight.class.should == Unit
+      @ingredient.weight.class.should == Ingredient::Weight
+      @ingredient.weight.should respond_to(:to_s)
     end
   end
 
