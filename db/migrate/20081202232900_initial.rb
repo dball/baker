@@ -1,18 +1,8 @@
 class Initial < ActiveRecord::Migration
   def self.up
-    create_table :units do |t|
-      t.column :name, :string, :limit => 40, :null => false
-      t.column :abbr, :string, :limit => 10, :null => false
-      t.column :kind, :string, :limit => 10, :null => false
-      t.column :family, :string, :limit => 10, :null => false
-      t.column :scale, :decimal, :scale => 4, :precision => 9, :null => false
-    end
-    add_index :units, [:name, :family], :unique => true
-    add_index :units, [:abbr, :family], :unique => true
-
     create_table :recipes do |t|
       t.column :name, :string, :limit => 40, :null => false
-      t.column :default_unit_scale, :decimal, :scale => 2, :precision => 5
+      t.column :base_weight, :string, :limit => 20
       t.column :preparation, :text
       t.column :source, :string
       t.column :source_page, :integer
@@ -34,8 +24,5 @@ class Initial < ActiveRecord::Migration
     drop_table :ingredients
     remove_index :recipes, :name
     drop_table :recipes
-    remove_index :units, [:abbr, :family]
-    remove_index :units, [:name, :family]
-    drop_table :units
   end
 end

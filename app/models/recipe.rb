@@ -1,21 +1,16 @@
 class Recipe < ActiveRecord::Base
-  has_many :ingredients, :dependent => :destroy
-
   validates_presence_of :name
   validates_uniqueness_of :name
 
-  attr_accessor :weight_unit, :scale
+  has_many :ingredients, :dependent => :destroy
 
-  def Recipe.default_weight_unit
-    Unit.new({ :name => 'ounce', :abbr => 'oz', :kind => 'weight', :scale => 1 })
+  def base_weight
+    @base_weight ||= Unit(self[:base_weight])
   end
 
-  def weight_unit
-    @weight_unit ||= Recipe.default_weight_unit
-  end
-
-  def scale
-    @scale ||= 1
+  def base_weight=(value)
+    @base_weight = value.is_a?(Unit) ? value : Unit(value)
+    self[:base_weight] = @base_weight.to_s
   end
 
   def ingredient_attributes=(values)
@@ -33,16 +28,12 @@ class Recipe < ActiveRecord::Base
     end if values[:new]
   end
 
-  def total_percent
-    ingredients.inject(0) {|sum, ingredient| sum += ingredient.percent }
-  end
-
-  def total_weight
-    ingredients.inject(0) {|sum, ingredient| sum += ingredient.weight }
-  end
-
   after_update do |recipe|
     recipe.ingredients.each { |ingredient| ingredient.save(false) }
+  end
+
+  def total_percent
+    ingredients.inject(0) {|sum, ingredient| sum += ingredient.percent }
   end
 
   def self.filter_ingredient_attributes(attributes)

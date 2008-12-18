@@ -1,5 +1,3 @@
-require 'rational'
-
 module Almost
   EPSILON = 0.001
 

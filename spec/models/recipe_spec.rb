@@ -1,15 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Recipe do
-  describe "recipe class methods" do
-    it "should filter ingredient attributes" do
-      recipe = Recipe.generate
-      attributes = { :percent => 50, :name => recipe.name}
-      Recipe.filter_ingredient_attributes(attributes).should == 
-        { :percent => 50, :subrecipe_id => recipe.id }
-    end
-  end
-
   describe "all recipes", :shared => true do
     it "must have a name" do
       @recipe.name.class.should == String
@@ -20,17 +11,17 @@ describe Recipe do
       @recipe.name.should == x
     end
 
+    it "must have a base weight" do
+      @recipe.base_weight.class.should == Unit
+    end
+
+    it "must accept a base weight" do
+      x = @recipe.base_weight = '100 g'
+      @recipe.base_weight.should == Unit(x)
+    end
+
     it "must have ingredients" do
       @recipe.ingredients.map {|i| i.class }.all? {|c| c == Ingredient }.should be_true
-    end
-
-    it "must have a weight unit" do
-      @recipe.weight_unit.class.should == Unit
-    end
-
-    it "must accept a weight unit" do
-      x = @recipe.weight_unit = Unit.generate
-      @recipe.weight_unit.should == x
     end
 
     it "should add new ingredients" do
@@ -133,5 +124,14 @@ describe Recipe do
     it_should_behave_like "all recipes"
     it_should_behave_like "a valid saved recipe"
     it_should_behave_like "a valid saved recipe with ingredients"
+  end
+
+  describe "recipe class methods" do
+    it "should filter ingredient attributes" do
+      recipe = Recipe.generate
+      attributes = { :percent => 50, :name => recipe.name}
+      Recipe.filter_ingredient_attributes(attributes).should == 
+        { :percent => 50, :subrecipe_id => recipe.id }
+    end
   end
 end

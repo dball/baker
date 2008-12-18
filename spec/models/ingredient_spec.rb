@@ -15,7 +15,7 @@ describe Ingredient do
     end
 
     it "must have a weight" do
-      @ingredient.weight.class.should == BigDecimal
+      @ingredient.weight.class.should == Unit
     end
   end
 

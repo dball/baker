@@ -1,23 +1,7 @@
 Recipe.delete_all
-Unit.delete_all
 
 ActiveRecord::Base.transaction do
-  Unit.create({ :name => 'ounce', :abbr => 'oz', :kind => 'weight', :family => 'us', :scale => 1 })
-  Unit.create({ :name => 'pound', :abbr => 'lb', :kind => 'weight', :family => 'us', :scale => 0.0625 })
-  Unit.create({ :name => 'gram', :abbr => 'g', :kind => 'weight', :family => 'metric', :scale => 28.3495 })
-  Unit.create({ :name => 'kilogram', :abbr => 'kg', :kind => 'weight', :family => 'metric', :scale => 0.0283495 })
-  
-  Unit.create({ :name => 'cup', :abbr => 'cup', :kind => 'volume', :family => 'us', :scale => 1 })
-  Unit.create({ :name => 'fluid ounce', :abbr => 'fl oz', :kind => 'volume', :family => 'us', :scale => 8 })
-  Unit.create({ :name => 'pint', :abbr => 'pt', :kind => 'volume', :family => 'us', :scale => 0.5 })
-  Unit.create({ :name => 'quart', :abbr => 'qt', :kind => 'volume', :family => 'us', :scale => 0.25 })
-  Unit.create({ :name => 'gallon', :abbr => 'gallon', :kind => 'volume', :family => 'us', :scale => 0.0625 })
-  Unit.create({ :name => 'tablespoon', :abbr => 'tbsp', :kind => 'volume', :family => 'us', :scale => 16 })
-  Unit.create({ :name => 'teaspoon', :abbr => 'tsp', :kind => 'volume', :family => 'us', :scale => 48 })
-  Unit.create({ :name => 'pinch', :abbr => 'pinch', :kind => 'volume', :family => 'us', :scale => 384 })
-  Unit.create({ :name => 'dash', :abbr => 'dash', :kind => 'volume', :family => 'us', :scale => 768 })
-
-  Recipe.create({ :name => 'poolish', :default_unit_scale => 11.25,
+  Recipe.create({ :name => 'poolish', :base_weight => '11.25 oz',
     :preparation => 'Stir until flour is fully hydrated, cover, then ferment for 3 to 4 hours. Retard overnight or up to three days in the refrigerator.',
     :source => 'The Bread Baker\'s Apprentice',
     :source_page => 106,
@@ -27,7 +11,7 @@ ActiveRecord::Base.transaction do
       { :name => 'yeast', :percent => 0.27 }
     ]}})
   
-  Recipe.create({ :name => 'biga', :default_unit_scale => 11.25,
+  Recipe.create({ :name => 'biga', :base_weight => '11.25 oz',
     :preparation => 'Combine the flour and yeast, then add the water, stirring until it forms a rough dough. Knead until pliable and tacky, 78-80°. Cover and ferment 3 hours or until doubled. Retard overnight or up to three days in the refrigerator.',
     :source => 'The Bread Baker\'s Apprentice',
     :source_page => 107,
@@ -37,7 +21,7 @@ ActiveRecord::Base.transaction do
       { :name => 'yeast', :percent => 0.49 }
     ]}})
 
-  Recipe.create({ :name => 'pâte fermentée', :default_unit_scale => 11.25,
+  Recipe.create({ :name => 'pâte fermentée', :base_weight => '11.25 oz',
     :preparation => 'Combine the flour, salt, and yeast, then add the water, stirring until it forms a rough dough. Knead until pliable and tacky, 78-80°. Cover and ferment 1 hour or until 150% of its original volume. Retard overnight or up to three days in the refrigerator, or three months in the freezer.',
     :source => 'The Bread Baker\'s Apprentice',
     :source_page => 105,
@@ -48,7 +32,7 @@ ActiveRecord::Base.transaction do
       { :name => 'yeast', :percent => 0.55 }
     ]}})
 
-  Recipe.create({ :name => 'french bread', :default_unit_scale => 10,
+  Recipe.create({ :name => 'french bread', :base_weight => '10 oz',
     :preparation => 'Remove the pâte fermentée dough from the refrigerator, cut until a dozen pieces, and let sit covered for an hour. Mix the flour, salt, yeast, and dough pieces, then add the water, stirring until it forms a rough dough. Knead until pliable and tacky, 78-80°. Oil, cover, and let rise 2 hours or until doubled. Shape, proof, and bake at 450° for 20-30 minutes.',
     :source => 'The Bread Baker\'s Apprentice',
     :source_page => 170,
