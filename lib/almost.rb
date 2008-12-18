@@ -1,17 +1,27 @@
 require 'rational'
 
 # Supplies methods for approximating numbers
-#
-# 2.almost == 1.999
-# 0.75001.nearest(1/4) == 3/4
 module Almost
   EPSILON = 0.001
 
   module InstanceMethods
+
+    # Return an Almost::Number object which has an approximate == method
+    # This lets us write things like:
+    #
+    # 1.almost == 0.999
+    #
+    # It takes an epsilon which indicates the amount of variance allowed
+    # between the numbers. An epsilon of 0.001, the default, indicates the
+    # numbers must be 99.9% similar.
     def almost(epsilon = EPSILON)
       Almost::Number.new(self, epsilon)
     end
 
+    # Returns the nearest rational fraction of the given denominator.
+    # Assuming mathn is required, this means we can write things like:
+    #
+    # 0.5.nearest(1/4) == 1/2
     def nearest(fraction)
       unless fraction.is_a?(Rational) && fraction.numerator == 1
         raise ArgumentError, fraction 
@@ -46,6 +56,11 @@ class Numeric
 end
 
 class Rational
+  # Overrides rational to_s to take a format arguemnt. If supplied, and equal
+  # to :split, renders the rational number as a whole number followed by the
+  # fractional part:
+  #
+  # (7/4).to_s(:split) == "1 3/4"
   def to_s_with_format(format = nil)
     if format.nil?
       to_s_without_format
