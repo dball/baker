@@ -20,6 +20,19 @@ describe Recipe do
       @recipe.base_weight.should == Unit(x)
     end
 
+    it "must have a base weight unit family" do
+      @recipe.base_weight_unit_family.class.should == String
+    end
+
+    it "must have a weight unit family" do
+      @recipe.weight_unit_family.class.should == String
+    end
+
+    it "must accept a weight unit family" do
+      x = @recipe.weight_unit_family = Recipe.weight_unit_families.last
+      @recipe.weight_unit_family.should == x
+    end
+
     it "must have ingredients" do
       @recipe.ingredients.map {|i| i.class }.all? {|c| c == Ingredient }.should be_true
     end
