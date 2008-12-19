@@ -21,5 +21,29 @@ describe UnitFamily do
     end
 
     it_should_behave_like "all objects"
+
+    it "should format 2 feet" do
+      @family.format(Unit('2 ft')).should == '2 ft'
+    end
+
+    it "should format 2.5 feet" do
+      @family.format(Unit('2.5 ft')).should == '2 1/2 ft'
+    end
+  end
+
+  describe "metric distance family" do
+    before(:each) do
+      @family = UnitFamily.new('metric', ['meter', 'cm', 'mm'], :decimal)
+    end
+
+    it_should_behave_like "all objects"
+
+    it "should format 2 meters" do
+      @family.format(Unit('2 m')).should == '2 m'
+    end
+
+    it "should format 2.5 meters" do
+      @family.format(Unit('2.5 m')).should == '2.5 m'
+    end
   end
 end

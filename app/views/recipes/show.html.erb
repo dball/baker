@@ -1,6 +1,6 @@
 <% breadcrumb(argumentize(@recipe.name.titleize), @recipe) %>
 <% if @recipe.weight_unit_family != @recipe.base_weight_unit_family %>
-  <% breadcrumb('system=' + @recipe.weight_unit_family) %>
+  <% breadcrumb('system=' + @recipe.weight_unit_family.name) %>
 <% end %>
 <% if @recipe.scale != 1 %>
   <% breadcrumb(sprintf("scale=%g", @recipe.scale)) %>
@@ -24,7 +24,7 @@
         <th colspan="3">
           <label for="weight_unit_family">System:</label>
           <select name="weight_unit_family" id="weight_unit_family">
-            <%= options_for_select(Recipe.weight_unit_families, @recipe.weight_unit_family) %>
+            <%= options_from_collection_for_select(Recipe::WEIGHT_UNIT_FAMILIES, :name, :name, @recipe.weight_unit_family.name) %>
           </select>
           <label for="scale">Scale:</label>
           <%= text_field_tag(:scale, sprintf('%g', @recipe.scale), :size => 3) %>

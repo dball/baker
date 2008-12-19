@@ -10,21 +10,19 @@ class Recipe < ActiveRecord::Base
     @scale ||= 1
   end
 
-  def Recipe.weight_unit_families
-    WEIGHT_UNIT_FAMILIES.map {|a| a[0] }
-  end
-
   WEIGHT_UNIT_FAMILIES = [
-    ['us', ['oz', 'lb']],
-    ['metric', ['g', 'kg']]
+    UnitFamily.new('us', ['oz', 'lb'], :fraction),
+    UnitFamily.new('metric', ['g', 'kg'], :decimal)
   ]
 
   def weight_unit_family
     @weight_unit_family ||= base_weight_unit_family
   end
 
-  def weight_units
-    WEIGHT_UNIT_FAMILIES.find {|a| a[0] == weight_unit_family }[1]
+  def weight_unit_family=(name)
+    family = WEIGHT_UNIT_FAMILIES.find {|family| family.name == name }
+    raise ArgumentError, name if family.nil?
+    @weight_unit_family = family
   end
 
   def base_weight
@@ -38,8 +36,8 @@ class Recipe < ActiveRecord::Base
 
   def base_weight_unit_family
     units = base_weight.units
-    if family = WEIGHT_UNIT_FAMILIES.find {|a| a[1].include?(units) }
-      family[0]
+    if family = WEIGHT_UNIT_FAMILIES.find { |family| family.include?(units) }
+      family
     end
   end
 

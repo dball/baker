@@ -14,17 +14,11 @@ class Ingredient < ActiveRecord::Base
     end
 
     def value
-      @value ||= (@ingredient.recipe.base_weight * @ingredient.recipe.scale * (@ingredient.percent / 100)).to(@ingredient.recipe.weight_units.first)
+      @value ||= (@ingredient.recipe.base_weight * @ingredient.recipe.scale * (@ingredient.percent / 100))
     end
 
     def to_s
-      scalar = value.scalar.nearest(1/8)
-      if scalar == 0
-        value.to_s
-      else
-        scalar = (scalar.is_a?(Rational) ? scalar.to_s(:split) : scalar.to_s)
-        scalar + ' ' + value.units
-      end
+      @ingredient.recipe.weight_unit_family.format(value)
     end
   end
 end

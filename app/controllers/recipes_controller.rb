@@ -1,6 +1,6 @@
 class RecipesController < ResourceController::Base
   show.before do
-    if params[:weight_unit_family] && Recipe.weight_unit_families.include?(params[:weight_unit_family])
+    if params[:weight_unit_family]
       @recipe.weight_unit_family = params[:weight_unit_family]
     end
     if params[:scale]

@@ -21,16 +21,16 @@ describe Recipe do
     end
 
     it "must have a base weight unit family" do
-      @recipe.base_weight_unit_family.class.should == String
+      @recipe.base_weight_unit_family.class.should == UnitFamily
     end
 
     it "must have a weight unit family" do
-      @recipe.weight_unit_family.class.should == String
+      @recipe.weight_unit_family.class.should == UnitFamily
     end
 
     it "must accept a weight unit family" do
-      x = @recipe.weight_unit_family = Recipe.weight_unit_families.last
-      @recipe.weight_unit_family.should == x
+      x = @recipe.weight_unit_family = Recipe::WEIGHT_UNIT_FAMILIES.last.name
+      @recipe.weight_unit_family.name.should == x
     end
 
     it "must have ingredients" do
