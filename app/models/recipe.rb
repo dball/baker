@@ -4,10 +4,27 @@ class Recipe < ActiveRecord::Base
 
   has_many :ingredients, :dependent => :destroy
 
-  attr_accessor :scale
+  attr_accessor :scale, :weight_unit_family
 
   def scale
     @scale ||= 1
+  end
+
+  def Recipe.weight_unit_families
+    WEIGHT_UNIT_FAMILIES.map {|a| a[0] }
+  end
+
+  WEIGHT_UNIT_FAMILIES = [
+    ['us', ['oz', 'lb']],
+    ['metric', ['g', 'kg']]
+  ]
+
+  def weight_unit_family
+    @weight_unit_family ||= base_weight_unit_family
+  end
+
+  def weight_units
+    WEIGHT_UNIT_FAMILIES.find {|a| a[0] == weight_unit_family }[1]
   end
 
   def base_weight
@@ -17,6 +34,13 @@ class Recipe < ActiveRecord::Base
   def base_weight=(value)
     @base_weight = value.is_a?(Unit) ? value : Unit(value)
     self[:base_weight] = @base_weight.to_s
+  end
+
+  def base_weight_unit_family
+    units = base_weight.units
+    if family = WEIGHT_UNIT_FAMILIES.find {|a| a[1].include?(units) }
+      family[0]
+    end
   end
 
   def ingredient_attributes=(values)
@@ -42,7 +66,7 @@ class Recipe < ActiveRecord::Base
     ingredients.inject(0) {|sum, ingredient| sum += ingredient.percent }
   end
 
-  def self.filter_ingredient_attributes(attributes)
+  def Recipe.filter_ingredient_attributes(attributes)
     if (name = attributes[:name]) && recipe = Recipe.find_by_name(name)
       new_attributes = attributes.dup
       new_attributes.delete(:name)
@@ -52,4 +76,5 @@ class Recipe < ActiveRecord::Base
       attributes
     end
   end
+
 end

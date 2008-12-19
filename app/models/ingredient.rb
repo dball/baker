@@ -14,7 +14,7 @@ class Ingredient < ActiveRecord::Base
     end
 
     def value
-      @value ||= @ingredient.recipe.base_weight * @ingredient.recipe.scale * (@ingredient.percent / 100)
+      @value ||= (@ingredient.recipe.base_weight * @ingredient.recipe.scale * (@ingredient.percent / 100)).to(@ingredient.recipe.weight_units.first)
     end
 
     def to_s

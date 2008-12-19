@@ -1,9 +1,8 @@
 class RecipesController < ResourceController::Base
   show.before do
-#    @weight_units = Unit.find(:all, :conditions => { :kind => @recipe.weight_unit.kind })
-#    if params[:weight_unit]
-#      @recipe.weight_unit = Unit.find(params[:weight_unit])
-#    end
+    if params[:weight_unit_family] && Recipe.weight_unit_families.include?(params[:weight_unit_family])
+      @recipe.weight_unit_family = params[:weight_unit_family]
+    end
     if params[:scale]
       @recipe.scale = params[:scale].to_f
     end

@@ -1,4 +1,7 @@
 <% breadcrumb(argumentize(@recipe.name.titleize), @recipe) %>
+<% if @recipe.weight_unit_family != @recipe.base_weight_unit_family %>
+  <% breadcrumb('system=' + @recipe.weight_unit_family) %>
+<% end %>
 <% if @recipe.scale != 1 %>
   <% breadcrumb(sprintf("scale=%g", @recipe.scale)) %>
 <% end %>
@@ -10,9 +13,9 @@
         <th>Percent</th>
         <th>Weight</th>
         <th>
-          <label for="weight_unit">Unit:</label>
-          <select name="weight_unit" id="weight_unit">
-            <%# options_from_collection_for_select(@weight_units, :id, :abbr, @recipe.weight_unit.id) %>
+          <label for="weight_unit_family">System:</label>
+          <select name="weight_unit_family" id="weight_unit_family">
+            <%= options_for_select(Recipe.weight_unit_families, @recipe.weight_unit_family) %>
           </select>
         </th>
         <th>
