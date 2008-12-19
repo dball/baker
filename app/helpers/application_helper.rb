@@ -18,6 +18,22 @@ module ApplicationHelper
     /\s/.match(title) ? '"' + title + '"' : title
   end
 
+  FRACTIONS = { '1/4' => 'BC', '1/2' => 'BD', '3/4' => 'BE', '1/3' => '2153',
+                '2/3' => '2154', '1/5' => '2155', '2/5' => '2156',
+                '3/5' => '2157', '4/5' => '2158', '1/6' => '2159',
+                '5/6' => '215A', '1/8' => '215B', '3/8' => '215C',
+                '5/8' => '215D', '7/8' => '215E' }
+
+  def fractionize(value)
+    value.gsub(/(\d+\/\d+)/) do |fraction|
+      if code = FRACTIONS[fraction]
+        '&#x' + code + ';'
+      else
+        fraction
+      end
+    end
+  end
+
   def breadcrumb(title, url = nil)
     @breadcrumbs ||= []
     @breadcrumbs << [title, url]

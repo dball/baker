@@ -12,7 +12,8 @@ table#ingredients td
   padding: 0.25em;
 }
 
-table#ingredients thead
+table#ingredients thead,
+table#ingredients tfoot tr th
 {
   border: 1px solid #cc8822;
   background: #fff;
@@ -23,7 +24,6 @@ table#ingredients th
   padding: 0.25em 0.5em;
   font-variant: small-caps;
   font-size: 80%;
-  text-align: right;
 }
 
 table#ingredients td.percent,

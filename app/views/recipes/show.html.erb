@@ -12,22 +12,23 @@
         <th>Ingredient</th>
         <th>Percent</th>
         <th>Weight</th>
-        <th>
-          <label for="weight_unit_family">System:</label>
-          <select name="weight_unit_family" id="weight_unit_family">
-            <%= options_for_select(Recipe.weight_unit_families, @recipe.weight_unit_family) %>
-          </select>
-        </th>
-        <th>
-          <label for="scale">Scale:</label>
-          <%= text_field_tag(:scale, sprintf('%g', @recipe.scale), :size => 3) %>
-        </th>
       </tr>
     </thead>
     <tfoot>
       <tr>
         <td>TOTAL</td>
         <td class="percent"><%= @recipe.total_percent %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th colspan="3">
+          <label for="weight_unit_family">System:</label>
+          <select name="weight_unit_family" id="weight_unit_family">
+            <%= options_for_select(Recipe.weight_unit_families, @recipe.weight_unit_family) %>
+          </select>
+          <label for="scale">Scale:</label>
+          <%= text_field_tag(:scale, sprintf('%g', @recipe.scale), :size => 3) %>
+        </th>
       </tr>
     </tfoot>
     <tbody>
@@ -41,7 +42,7 @@
             <% end %>
           </td>
           <td class="percent"><%= ingredient.percent %></td>
-          <td><%= ingredient.weight %></td>
+          <td><%= fractionize(ingredient.weight.to_s) %></td>
         </tr>
       <% end %>
     </tbody>
