@@ -18,7 +18,13 @@ class UnitFamily
   def format(value)
     if output_format == :decimal
       value = value.to(units.last)
-      sprintf('%.3g %s', value.scalar, value.units)
+      # This rounds to 3 significant figures, e.g. 0.444 or 44.4
+      decimal = sprintf('%.2e', value.scalar).to_f
+      if (integer = decimal.round).almost == decimal
+        integer.to_s + ' ' + value.units
+      else
+        decimal.to_s + ' ' + value.units
+      end
     else
       last = @units.last
       parts = []
