@@ -58,4 +58,16 @@ describe UnitFamily do
       @family.format(Unit('4 ft')).should == '1.22 m'
     end
   end
+
+  describe "pounds and ounces" do
+    before(:each) do
+      @family = UnitFamily.new('us', ['lb', 'oz'], :fraction)
+    end
+
+    it_should_behave_like "all objects"
+
+    it "should format 2 lbs" do
+      @family.format(Unit('32 oz').to('lb')).should == '2 lb'
+    end
+  end
 end
