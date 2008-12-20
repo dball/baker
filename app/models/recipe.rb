@@ -11,8 +11,8 @@ class Recipe < ActiveRecord::Base
   end
 
   WEIGHT_UNIT_FAMILIES = [
-    UnitFamily.new('us', ['oz', 'lb'], :fraction),
-    UnitFamily.new('metric', ['g', 'kg'], :decimal)
+    UnitFamily.new('us', ['lb', 'oz'], :fraction),
+    UnitFamily.new('metric', ['g'], :decimal)
   ]
 
   def weight_unit_family

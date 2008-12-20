@@ -16,17 +16,33 @@ class UnitFamily
   end
 
   def format(value)
-    unit = value.to(@units.first)
-    if output_format == :fraction
-      scalar = unit.scalar.nearest(1/8)
-      if scalar == 0
-        unit.to_s
-      else
-        scalar = (scalar.is_a?(Rational) ? scalar.to_s(:split) : scalar.to_s)
-        scalar + ' ' + unit.units
-      end
+    if output_format == :decimal
+      value = value.to(units.last)
+      sprintf('%.3g %s', value.scalar, value.units)
     else
-      sprintf('%.3g %s', unit.scalar, unit.units)
+      last = @units.last
+      parts = []
+      @units.each do |unit|
+        value = value.to(unit)
+        if value.scalar == 0
+        elsif unit != last
+          (whole, part) = value.scalar.divmod(1)
+          if whole > 0
+            value.scalar = whole
+            parts << sprintf('%d %s', whole, value.units)
+          end
+          value = Unit(sprintf('%f %s', part, value.units))
+        else
+          scalar = value.scalar.nearest(1/8)
+          if scalar == 0
+            parts << value.to_s
+          else
+            scalar = (scalar.is_a?(Rational) ? scalar.to_s(:split) : scalar.to_s)
+            parts << sprintf('%s %s', scalar, value.units)
+          end
+        end
+      end
+      parts.join(' ')
     end
   end
 end
