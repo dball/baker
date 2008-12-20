@@ -67,7 +67,7 @@ describe UnitFamily do
     it_should_behave_like "all objects"
 
     it "should format 2 lbs" do
-      @family.format(Unit('32 oz').to('lb')).should == '2 lb'
+      @family.format(Unit('32 oz').to('lb')).should == '2 lbs'
     end
   end
 end

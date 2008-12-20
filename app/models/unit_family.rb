@@ -24,21 +24,25 @@ class UnitFamily
       parts = []
       @units.each do |unit|
         value = value.to(unit)
-        if value.scalar == 0
+        # This is a hokey way of doing this, but value.scalar is giving
+        # imprecise results covnerting oucnes to pounds, and I don't eel
+        # like rounding to X significant figures just yet.
+        md = /^(\d+)(\.\d+)? /.match(s = value.to_s)
+        whole = md[1].to_i
+        part = md.length == 3 ? md[2].to_f : 0
+        if whole == 0 && part == 0
         elsif unit != last
-          (whole, part) = value.scalar.divmod(1)
           if whole > 0
-            value.scalar = whole
             parts << sprintf('%d %s', whole, value.units)
           end
           value = Unit(sprintf('%f %s', part, value.units))
         else
-          scalar = value.scalar.nearest(1/8)
-          if scalar == 0
+          frac = value.scalar.nearest(1/8)
+          if frac == 0
             parts << value.to_s
           else
-            scalar = (scalar.is_a?(Rational) ? scalar.to_s(:split) : scalar.to_s)
-            parts << sprintf('%s %s', scalar, value.units)
+            frac = (frac.is_a?(Rational) ? frac.to_s(:split) : frac.to_s)
+            parts << sprintf('%s %s', frac, value.units)
           end
         end
       end
