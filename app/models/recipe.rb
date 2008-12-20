@@ -2,6 +2,9 @@ class Recipe < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  validates_presence_of :base_weight
+  # FIXME - validate Unitness of base_weight
+
   has_many :ingredients, :dependent => :destroy
 
   attr_accessor :scale, :weight_unit_family
@@ -26,12 +29,27 @@ class Recipe < ActiveRecord::Base
   end
 
   def base_weight
-    @base_weight ||= Unit(self[:base_weight])
+    unless @base_weight
+      begin
+        @base_weight = Unit(self[:base_weight])
+      rescue ArgumentError
+        @base_weight = nil
+      end
+    end
+    @base_weight
   end
 
   def base_weight=(value)
-    @base_weight = value.is_a?(Unit) ? value : Unit(value)
-    self[:base_weight] = @base_weight.to_s
+    if value.is_a?(Unit)
+      @base_weight = value
+    else
+      begin
+        @base_weight = Unit(value)
+      rescue ArgumentError
+        @base_weight = nil
+      end
+    end
+    self[:base_weight] = @base_weight.nil? ? nil : @base_weight.to_s
   end
 
   def base_weight_unit_family
