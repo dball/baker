@@ -16,7 +16,7 @@ function deleteIngredient(input) {
 
 function keyDownIngredient(event) {
   if (event.keyCode == 13) {
-    var inputs = $('#ingredients').find(':text');
+    var inputs = $('.edits_many').find(':text');
     for (var i=0; i<inputs.length; i++) {
       if (inputs[i] == this) {
         if (i + 1 == inputs.length) {
@@ -84,7 +84,7 @@ $(document).ready(function() {
   $('#header h1').corner('bottom 15px');
   $('#content').corner('20px');
   $('#content #main').corner('15px');
-  $('#ingredients').find(':text').keydown(keyDownIngredient);
+  $('.edits_many').find(':text').keydown(keyDownIngredient);
   $('#ingredients').alignAround('.percent', '.');
   $('#ingredients').alignAround('.weight', '.');
   $('.autosubmit :input').change(function() {
