@@ -4,6 +4,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.gem 'ruby-units'
+  config.gem 'rubaidh-google_analytics', :lib => 'rubaidh/google_analytics', :source => 'http://gems.github.com'
   config.time_zone = 'UTC'
   config.action_controller.session = {
     :session_key => '_baker_session',
@@ -12,3 +13,4 @@ Rails::Initializer.run do |config|
 end
 
 require 'almost'
+Rubaidh::GoogleAnalytics.tracker_id = 'UA-6821662-2'
