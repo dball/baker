@@ -1,7 +1,7 @@
 <% breadcrumb 'Login', user_session_path %>
 
 <% form_for @user_session, :url => user_session_path do |form| %>
-  <%= form.error_message %>
+  <%= form.error_messages %>
   <p>
     <%= form.label :login %>
     <br />
