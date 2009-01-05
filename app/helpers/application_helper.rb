@@ -56,10 +56,10 @@ module ApplicationHelper
   private
 
   def breadcrumbs!
-    breadcrumbs = [
-      ['bake.rb', root_path],
-      [controller.controller_name, { :action => 'index' }]
-    ]
+    breadcrumbs = [ ['bake.rb', root_path] ]
+    if controller.respond_to?(:index)
+      breadcrumbs <<  [controller.controller_name, { :action => 'index' }]
+    end
     if !@breadcrumbs.blank?
       breadcrumbs += @breadcrumbs
     end
