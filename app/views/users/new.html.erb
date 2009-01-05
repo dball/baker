@@ -1,0 +1,6 @@
+<% breadcrumb 'Register Account' %>
+<% form_for @user, :url => account_path do |form| %>
+  <%= form.error_message %>
+  <%= render :partial => 'form', :object => form %>
+  <%= form.submit 'Register' %>
+<% end %>

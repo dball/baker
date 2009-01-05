@@ -1,0 +1,21 @@
+<% breadcrumb 'Login', user_session_path %>
+
+<% form_for @user_session, :url => user_session_path do |form| %>
+  <%= form.error_message %>
+  <p>
+    <%= form.label :login %>
+    <br />
+    <%= form.text_field :login %>
+  </p>
+  <p>
+    <%= form.label :password %>
+    <br />
+    <%= form.text_field :password %>
+  </p>
+  <p>
+    <%= form.check_box :remember_me %>
+    <%= form.label :remember_me %>
+    <br />
+  </p>
+  <%= form.submit 'Login' %>
+<% end %>

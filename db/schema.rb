@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081202232900) do
+ActiveRecord::Schema.define(:version => 20090105192813) do
 
   create_table "ingredients", :force => true do |t|
     t.decimal "percent",                    :precision => 6, :scale => 3, :null => false
@@ -29,5 +29,20 @@ ActiveRecord::Schema.define(:version => 20081202232900) do
   end
 
   add_index "recipes", ["name"], :name => "index_recipes_on_name"
+
+  create_table "users", :force => true do |t|
+    t.string   "login"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.integer  "login_count"
+    t.datetime "last_request_at"
+    t.datetime "last_login_at"
+    t.datetime "current_login_at"
+    t.string   "last_login_ip"
+    t.string   "current_login_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

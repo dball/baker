@@ -1,0 +1,7 @@
+<% breadcrumb('Edit My Account', edit_account_path) %>
+<% form_for @user, :url => account_path do |form| %>
+  <%= form.error_messages %>
+  <%= render :partial => 'form', :object => form %>
+  <%= form.submit 'Update' %>
+<% end %>
+<%= link_to 'My Account', account_path %>
