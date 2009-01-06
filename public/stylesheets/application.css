@@ -56,3 +56,9 @@ body
   padding: 1em;
   background: #ffffcc;
 }
+
+form.button-to,
+form.button-to > div
+{
+  display: inline;
+}
