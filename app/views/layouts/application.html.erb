@@ -11,7 +11,15 @@
 </head>
 <body>
   <div id="header">
-    <h1>$ <%= breadcrumbs_links %></h1>
+    <div class="inner">
+      <h1>$ <%= breadcrumbs_links %></h1>
+      <% unless current_user.nil? %>
+        <div id="login">
+          <%=h current_user.login %>
+          <%= button_to 'Logout', user_session_path, { :method => :delete } %>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div id="content">
     <div id="main">

@@ -1,4 +1,4 @@
-<% breadcrumb('Edit My Account', edit_account_path) %>
+<% breadcrumb('edit-account', edit_account_path) %>
 <% form_for @user, :url => account_path do |form| %>
   <%= form.error_messages %>
   <%= render :partial => 'form', :object => form %>

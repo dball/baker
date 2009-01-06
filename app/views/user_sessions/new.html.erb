@@ -1,4 +1,4 @@
-<% breadcrumb 'Login', user_session_path %>
+<% breadcrumb 'login', new_user_session_path %>
 
 <% form_for @user_session, :url => user_session_path do |form| %>
   <%= form.error_messages %>
@@ -19,3 +19,5 @@
   </p>
   <%= form.submit 'Login' %>
 <% end %>
+
+<%= button_to 'Create Account', new_user_path, { :method => :get } %>
