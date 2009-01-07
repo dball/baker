@@ -2,6 +2,11 @@ RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
 require File.join(File.dirname(__FILE__), 'boot')
 
+AUTHORIZATION_MIXIN = 'hardwired'
+LOGIN_REQUIRED_REDIRECTION = { :controller => '/user_sessions', :action => :new }
+PERMISSION_DENIED_REDIRECTION = { :controller => '/recipes', :action => :index }
+STORE_LOCATION_METHOD = :store_location
+
 Rails::Initializer.run do |config|
   config.gem 'ruby-units'
   config.gem 'rubaidh-google_analytics', :lib => 'rubaidh/google_analytics', :source => 'http://gems.github.com'

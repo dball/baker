@@ -12,6 +12,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_login_ip
       t.string :current_login_ip
       t.timestamps
+      t.boolean :admin, :null => false, :default => false
     end
     add_index :users, :login, :unique => true
   end

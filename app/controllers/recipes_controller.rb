@@ -1,4 +1,6 @@
 class RecipesController < ResourceController::Base
+  permit 'owner of :object', :only => [ :edit, :update, :destroy ]
+
   show.before do
     if params[:weight_unit_family]
       @recipe.weight_unit_family = params[:weight_unit_family]
@@ -12,8 +14,6 @@ class RecipesController < ResourceController::Base
       ingredient.recipe = @recipe
     end
   end
-
-  private
 
   def object
     @object ||= Recipe.find(param, :include => :ingredients) unless param.nil?

@@ -6,8 +6,13 @@ class Recipe < ActiveRecord::Base
   # FIXME - validate Unitness of base_weight
 
   has_many :ingredients, :dependent => :destroy
+  belongs_to :owner, :class_name => 'User'
 
   attr_accessor :scale, :weight_unit_family
+
+  def accepts_role?(role, user)
+    user == owner || user.has_role?(role)
+  end
 
   def scale
     @scale ||= 1
